@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Смена пароля — ROMA-ASLAN</title>
+    <style>
+        body { font-family: Arial; background: #111; color: #00AFAF; text-align: center; padding: 100px 20px; }
+        h1 { font-size: 42px; margin-bottom: 30px; }
+        input, button { padding: 16px; margin: 10px; width: 320px; max-width: 90%; border-radius: 50px; border: none; font-size: 16px; }
+        input { background: #222; color: white; }
+        button { background: #00AFAF; color: white; font-weight: bold; cursor: pointer; }
+        a { color: #00AFAF; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>СМЕНА ПАРОЛЯ</h1>
+    <form method="post">
+        <input type="password" name="password" placeholder="Новый пароль" required><br>
+        <input type="password" name="confirm" placeholder="Повтори новый пароль" required><br>
+        <button type="submit">Сменить пароль</button>
+    </form>
+    <br>
+    <a href="/login">← На страницу входа</a>
+</body>
+</html>

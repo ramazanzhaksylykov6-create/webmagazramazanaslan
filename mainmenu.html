@@ -1,0 +1,259 @@
+<!DOCTYPE html>                                     <!--Тип документа — современный HTML5 --> 
+<html lang="ru">                                    <!--Язык сайта — русский-->
+
+<head>
+    <meta charset="UTF-8">                          <!--Поддержка русских букв-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Адаптив под телефоны -->
+    <title>roma-aslan online shop — Главная</title>    <!--Название вкладки в браузере-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> <!--Иконки (телефон, инста и т.д.) -->
+
+    <style>
+        /* ==== ПОЛНЫЙ СБРОС СТИЛЕЙ ==== */
+        * { margin: 0; padding: 0; box-sizing: border-box; } /* Убираем все отступы и включаем правильный расчёт размеров */
+
+        /* ==== ОСНОВНЫЕ СТИЛИ СТРАНИЦЫ ==== */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif; /* Современный чистый шрифт */
+            background: #ffffff;                        /* Белый фон всей страницы */
+            color: #333;                                /* Основной цвет текста — тёмно-серый */
+            line-height: 1.6;                           /* Удобная высота строк для чтения */
+            min-height: 100vh;                          /* Страница не меньше высоты экрана */
+        }
+
+        /* ==== ШАПКА САЙТА ==== */
+        header {
+            position: fixed;                            /* Шапка прилипает к верху при прокрутке */
+            top: 0; left: 0; right: 0;                  /* Растягиваем на всю ширину */
+            z-index: 1000;                              /* Шапка всегда поверх контента */
+            padding: 16px 0;                            /* Отступы внутри шапки */
+            background: rgba(245, 245, 248, 0.78);      /* Полупрозрачный серый фон */
+            backdrop-filter: blur(20px);                /* Эффект матового стекла (как в iOS) */
+            -webkit-backdrop-filter: blur(20px);        /* Для старых браузеров Safari */
+            border-bottom: 1px solid rgba(0,175,175,0.12); /* Тонкая линия цвета Тиффани снизу */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04); /* Лёгкая тень под шапкой */
+        }
+
+        .header-inner {
+            max-width: 1400px;                          /* Контент не шире 1400px */
+            margin: 0 auto;                             /* По центру страницы */
+            padding: 0 30px;                            /* Отступы по бокам */
+            display: flex;                              /* Логотип и меню в одной строке */
+            justify-content: space-between;             /* Логотип слева, меню справа */
+            align-items: center;                        /* Всё выровнено по центру по вертикали */
+        }
+
+        .logo {
+            font-size: 34px;                            /* Большой размер названия */
+            font-weight: 900;                           /* Очень жирный текст */
+            color: #00AFAF;                             /* Основной цвет — Тиффани */
+            letter-spacing: 1px;                        /* Расстояние между буквами */
+        }
+
+        nav a {
+            color: #555;                                /* Цвет ссылок — серый */
+            text-decoration: none;                      /* Без подчёркивания */
+            margin-left: 45px;                          /* Расстояние между пунктами меню */
+            font-weight: 600;                           /* Полужирный текст */
+            font-size: 17px;                            /* Размер шрифта */
+            transition: all 0.3s;                       /* Плавная смена цвета при наведении */
+            position: relative;                         /* Для будущих эффектов */
+        }
+
+        nav a:hover {                                   /* При наведении на ссылку */
+            color: #00AFAF;                             /* Цвет меняется на Тиффани */
+        }
+
+        nav a.active {                                  /* Подсветка текущей страницы */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            font-weight: 700;                           /* Ещё жирнее */
+        }
+
+        .cart-link {
+            background: #00AFAF;                        /* Фон кнопки "Корзина" — Тиффани */
+            color: white !important;                    /* Белый текст (важно!) */
+            padding: 12px 30px;                         /* Отступы внутри кнопки */
+            border-radius: 50px;                        /* Скруглённые углы (таблетка) */
+            font-weight: 700;                           /* Жирный текст */
+            position: relative;                         /* Для бейджика с цифрой */
+        }
+
+        .cart-badge {
+            position: absolute;                         /* Позиция поверх кнопки */
+            top: -8px;                                  /* Сдвиг вверх */
+            right: -10px;                               /* Сдвиг вправо */
+            background: #ff4757;                        /* Красный фон */
+            color: white;                               /* Белая цифра */
+            font-size: 13px;                            /* Маленький текст */
+            min-width: 22px;                            /* Минимальная ширина */
+            height: 22px;                               /* Высота */
+            border-radius: 50%;                         /* Круглая форма */
+            display: flex;                              /* Центрирование содержимого */
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;                          /* Жирная цифра */
+        }
+
+        /* ==== ГЛАВНЫЙ БАННЕР (HERO) ==== */
+        .hero {
+            height: 100vh;                              /* На всю высоту экрана */
+            background: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.95)),
+                        url('/static/images/banner.jpg') center/cover no-repeat; /* Белая плёнка + фото */
+            display: flex;                              /* Flex для центрирования */
+            flex-direction: column;                     /* По вертикали */
+            justify-content: center;                    /* По центру по вертикали */
+            align-items: center;                        /* По центру по горизонтали */
+            text-align: center;                         /* Текст по центру */
+            padding-top: 80px;                          /* Отступ сверху, чтобы шапка не перекрывала */
+        }
+
+        .hero h1 {
+            font-size: 88px;                            /* Огромный заголовок */
+            font-weight: 900;                           /* Максимально жирный */
+            letter-spacing: 8px;                        /* Расстояние между буквами */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            margin-bottom: 20px;                        /* Отступ снизу */
+        }
+
+        .hero p {
+            font-size: 26px;                            /* Большой подзаголовок */
+            color: #555;                                /* Серый текст */
+            margin-bottom: 50px;                        /* Отступ перед кнопкой */
+            max-width: 800px;                           /* Не слишком широко */
+        }
+
+        .btn-hero {
+            background: #00AFAF;                        /* Фон кнопки — Тиффани */
+            color: white;                               /* Белый текст */
+            padding: 22px 90px;                         /* Большие отступы внутри */
+            border: none;                               /* Без рамки */
+            border-radius: 60px;                        /* Очень скруглённая */
+            font-size: 24px;                            /* Крупный текст */
+            font-weight: bold;                          /* Жирный */
+            cursor: pointer;                            /* Рука при наведении */
+            transition: all 0.4s;                       /* Плавная анимация */
+            box-shadow: 0 15px 35px rgba(0,175,175,0.3); /* Тень под кнопкой */
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-5px);                /* Поднимается вверх */
+            box-shadow: 0 20px 40px rgba(0,175,175,0.4); /* Тень становится больше */
+            background: #009c9c;                        /* Темнее при наведении */
+        }
+
+        /* ==== ПРЕИМУЩЕСТВА ==== */
+        .features {
+            max-width: 1400px;                          /* Контент не шире 1400px */
+            margin: 140px auto;                         /* Отступ сверху + по центру */
+            padding: 0 30px;                            /* Отступы по бокам */
+            display: grid;                              /* Сетка */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Адаптивная сетка: от 1 до 3 колонок */
+            gap: 40px;                                  /* Расстояние между карточками */
+        }
+
+        .feature {
+            background: #fafafa;                        /* Кремовый фон карточки */
+            padding: 50px 30px;                         /* Большие отступы внутри */
+            border-radius: 28px;                        /* Скруглённые углы */
+            text-align: center;                         /* Текст по центру */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);   /* Лёгкая тень */
+            transition: all 0.4s;                       /* Плавная анимация */
+            border: 1px solid rgba(0,175,175,0.1);       /* Тонкая рамка цвета Тиффани */
+        }
+
+        .feature:hover {
+            transform: translateY(-15px);               /* Карточка поднимается при наведении */
+            box-shadow: 0 20px 50px rgba(0,175,175,0.15); /* Тень ярче */
+        }
+
+        .feature i {
+            font-size: 58px;                            /* Большая иконка */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            margin-bottom: 25px;                        /* Отступ снизу */
+        }
+
+        .feature h3 {
+            font-size: 26px;                            /* Заголовок карточки */
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .feature p {
+            color: #666;                                /* Серый текст описания */
+            font-size: 17px;
+        }
+
+        /* ==== ПОДВАЛ ==== */
+        footer {
+            background: #f8f9fa;                        /* Светло-кремовый фон */
+            color: #666;                                /* Серый текст */
+            text-align: center;                         /* По центру */
+            padding: 90px 20px;                         /* Большие отступы */
+            border-top: 1px solid rgba(0,175,175,0.1);  /* Тонкая линия сверху */
+            margin-top: 100px;                          /* Отступ от контента */
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ШАПКА САЙТА -->
+    <header>
+        <div style="text-align:right; padding:20px; background:#f0eeee; border-bottom:3px solid #00afaf;">
+    {% if logged_in %}
+        Привет, <b>{{ username }}</b>!
+        {% if is_admin %}
+            • <a href="/admin" style="color:#00AFAF;">АДМИНКА</a>
+        {% endif %}
+        • <a href="/logout">Выйти</a>
+    {% else %}
+        <a href="/login">Вход</a> • <a href="/register">Регистрация</a>
+    {% endif %}
+</div>
+        <div class="header-inner">
+            <div class="logo">PROJECT SHOP</div>                              <!-- Название магазина -->
+            <nav>
+                <a href="/" class="{% if request.path == '/' %}active{% endif %}">Главная</a>     <!-- Ссылка на главную + подсветка -->
+                <a href="/catalog" class="{% if request.path == '/catalog' %}active{% endif %}">Каталог</a>
+                <a href="/cart" class="cart-link"><!-- Кнопка корзины -->
+                    Корзина
+                    {% if session.get('cart', [])|length > 0 %}<!-- Если в корзине есть товары -->
+                        <span class="cart-badge">{{ session.get('cart', [])|length }}</span> <!-- Показываем количество -->
+                    {% endif %}
+                </a>
+                <a href="/contacts" class="{% if request.path == '/contacts' %}active{% endif %}">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ГЛАВНЫЙ БАННЕР -->
+    <div class="hero">
+        <h1>PROJECT SHOP</h1>                                                 <!-- Название магазина крупно -->
+        <p>Премиальная одежда с идеальной посадкой<br>и безупречным стилем</p> <!-- Слоган -->
+        <a href="{{ url_for('catalog') }}" class="btn-hero">В КАТАЛОГ</a>   <!-- Кнопка перехода в каталог -->
+    </div>
+
+    <!-- ПРЕИМУЩЕСТВА -->
+    <div class="features">
+        <div class="feature">
+            <i class="fas fa-shipping-fast"></i>                            <!-- Иконка быстрой доставки -->
+            <h3>Доставка по Астане — 3–4 часа</h3>
+            <p>По Казахстану — 3–5 дней</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-sync-alt"></i>                                 <!-- Иконка возврата -->
+            <h3>Лёгкий возврат 14 дней</h3>
+            <p>Примерка дома без лишних вопросов</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-gem"></i>                                      <!-- Иконка премиум-качества -->
+            <h3>Только премиум материалы</h3>
+            <p>100% оригинал и качество</p>
+        </div>
+    </div>
+
+    <!-- ПОДВАЛ -->
+    <footer>
+        © 2025 PROJECT SHOP online shop — Все права защищены               <!-- Копирайт -->
+    </footer>
+</body>
+</html>

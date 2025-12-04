@@ -1,0 +1,274 @@
+<!DOCTYPE html>                                   <!--Тип документа — современный HTML5 --> 
+<html lang="ru">                                    <!--Язык сайта — русский-->
+
+<head>
+    <meta charset="UTF-8">                          <!--Поддержка русских букв-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Адаптив под телефоны -->
+    <title>Контакты — ROMA-ASLAN</title>            <!--Название вкладки в браузере-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> <!--Иконки (телефон, инста и т.д.) -->
+
+    <style>
+        /* ==== СБРОС СТИЛЕЙ ==== */
+        * { margin: 0; padding: 0; box-sizing: border-box; } /* Убираем все отступы */
+
+        /* ==== ОСНОВНЫЕ СТИЛИ ==== */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif; /* Современный шрифт */
+            background: #ffffff;                        /* Белый фон */
+            color: #333;                                /* Тёмный текст */
+            min-height: 100vh;                          /* Страница не короче экрана */
+            line-height: 1.6;                           /* Удобные строки */
+        }
+
+        /* ==== ШАПКА (ПРИЛИПАЕТ СВЕРХУ) ==== */
+        header {
+            position: fixed;                            /* Фиксируется при прокрутке */
+            top: 0; left: 0; right: 0;                  /* На всю ширину */
+            z-index: 1000;                              /* Поверх всего */
+            padding: 16px 0;                            /* Отступы внутри */
+            background: rgba(245, 245, 248, 0.78);      /* Полупрозрачный серый */
+            backdrop-filter: blur(20px);                /* Эффект стекла */
+            -webkit-backdrop-filter: blur(20px);        /* Для старых браузеров */
+            border-bottom: 1px solid rgba(0, 175, 175, 0.12); /* Линия Тиффани снизу */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04); /* Тень под шапкой */
+        }
+
+        .header-inner {
+            max-width: 1400px;                          /* Контент не шире 1400px */
+            margin: 0 auto;                             /* По центру */
+            padding: 0 30px;                            /* Отступы по бокам */
+            display: flex;                              /* Логотип и меню в строке */
+            justify-content: space-between;             /* Логотип слева, меню справа */
+            align-items: center;                        /* По центру по вертикали */
+        }
+
+        .logo {
+            font-size: 34px;                            /* Большое название */
+            font-weight: 900;                           /* Очень жирный текст */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            letter-spacing: 1px;                        /* Расстояние между буквами */
+        }
+
+        nav a {
+            color: #555;                                /* Серый цвет ссылок */
+            text-decoration: none;                      /* Без подчёркивания */
+            margin-left: 45px;                          /* Расстояние между пунктами */
+            font-weight: 600;                           /* Полужирный */
+            font-size: 17px;                            /* Размер шрифта */
+            transition: color 0.3s;                     /* Плавная смена цвета */
+        }
+
+        nav a:hover, nav a.active {
+            color: #00AFAF;                             /* При наведении и на активной странице — Тиффани */
+            font-weight: 700;                           /* Ещё жирнее */
+        }
+
+        .cart-link {
+            background: #00AFAF;                        /* Фон кнопки "Корзина" */
+            color: white !important;                    /* Белый текст */
+            padding: 12px 30px;                         /* Отступы внутри */
+            border-radius: 50px;                        /* Скруглённые углы */
+            font-weight: 700;                           /* Жирный текст */
+            position: relative;                         /* Для бейджика */
+        }
+
+        .cart-badge {
+            position: absolute;                         /* Поверх кнопки */
+            top: -8px;                                  /* Сдвиг вверх */
+            right: -10px;                               /* Сдвиг вправо */
+            background: #ff4757;                        /* Красный фон */
+            color: white;                               /* Белая цифра */
+            font-size: 13px;                            /* Маленький текст */
+            min-width: 22px;                            /* Минимум ширина */
+            height: 22px;                               /* Высота */
+            border-radius: 50%;                         /* Круг */
+            display: flex;                              /* Центрирование */
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;                          /* Жирная цифра */
+        }
+
+        /* ==== ОСНОВНОЙ КОНТЕНТ ==== */
+        .container {
+            max-width: 1200px;                          /* Контент не шире 1200px */
+            margin: 120px auto 140px;                   /* Отступ сверху и снизу + по центру */
+            padding: 0 30px;                            /* Отступы по бокам */
+        }
+
+        h1 {
+            text-align: center;                         /* Заголовок по центру */
+            font-size: 72px;                            /* Очень большой текст */
+            font-weight: 800;                           /* Жирный */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            margin-bottom: 90px;                        /* Отступ снизу */
+        }
+
+        /* ==== КАРТОЧКИ КОНТАКТОВ ==== */
+        .contact-grid {
+            display: grid;                              /* Сетка */
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* Адаптивно */
+            gap: 40px;                                  /* Расстояние между карточками */
+            margin-bottom: 80px;                        /* Отступ снизу */
+        }
+
+        .contact-card {
+            background: #fafafa;                        /* Кремовый фон */
+            border-radius: 32px;                        /* Скруглённые углы */
+            padding: 50px 30px;                         /* Отступы внутри */
+            text-align: center;                         /* Текст по центру */
+            box-shadow: 0 12px 35px rgba(0,0,0,0.06);   /* Тень */
+            border: 1px solid rgba(0, 175, 175, 0.12);   /* Рамка Тиффани */
+            transition: all 0.4s ease;                  /* Плавная анимация */
+        }
+
+        .contact-card:hover {
+            transform: translateY(-16px);               /* Поднимается при наведении */
+            box-shadow: 0 25px 50px rgba(0, 175, 175, 0.18); /* Тень ярче */
+        }
+
+        .contact-card i {
+            font-size: 48px;                            /* Большая иконка */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            margin-bottom: 25px;                        /* Отступ снизу */
+        }
+
+        .contact-card h3 {
+            font-size: 28px;                            /* Заголовок карточки */
+            margin-bottom: 18px;                        /* Отступ снизу */
+            color: #222;                                /* Тёмный текст */
+        }
+
+        .contact-card p {
+            color: #666;                                /* Серое описание */
+            margin-bottom: 20px;                        /* Отступ перед ссылкой */
+            font-size: 17px;
+        }
+
+        .contact-card a {
+            color: #00AFAF;                             /* Ссылка цвета Тиффани */
+            text-decoration: none;                      /* Без подчёркивания */
+            font-weight: 700;                           /* Жирный текст */
+            font-size: 22px;                            /* Крупный размер */
+            transition: all 0.3s;                       /* Плавная анимация */
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;                 /* Подчёркивание при наведении */
+        }
+
+        /* ==== СОЦСЕТИ ==== */
+        .social {
+            display: flex;                              /* Иконки в ряд */
+            justify-content: center;                    /* По центру */
+            gap: 30px;                                  /* Расстояние между иконками */
+            margin: 60px 0;                             /* Отступы сверху и снизу */
+        }
+
+        .social a {
+            width: 70px;                                /* Размер иконки */
+            height: 70px;
+            background: #f0f5f5;                        /* Светлый фон */
+            border-radius: 50%;                         /* Круглая форма */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;                            /* Большая иконка */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            transition: all 0.4s;                       /* Плавная анимация */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);     /* Тень */
+        }
+
+        .social a:hover {
+            background: #00AFAF;                        /* Фон Тиффани при наведении */
+            color: white;                               /* Белая иконка */
+            transform: translateY(-8px) scale(1.1);     /* Поднимается и увеличивается */
+            box-shadow: 0 20px 40px rgba(0, 175, 175, 0.3); /* Тень ярче */
+        }
+
+        /* ==== КАРТА ==== */
+        .map {
+            border-radius: 32px;                        /* Скруглённые углы */
+            overflow: hidden;                           /* Чтоб карта не вылезала */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);    /* Тень под картой */
+            border: 1px solid rgba(0, 175, 175, 0.15);  /* Рамка Тиффани */
+        }
+
+        /* ==== ПОДВАЛ ==== */
+        footer {
+            background: #f8f9fa;                        /* Светло-кремовый фон */
+            color: #666;                                /* Серый текст */
+            text-align: center;                         /* По центру */
+            padding: 90px 20px;                         /* Отступы */
+            border-top: 1px solid rgba(0, 175, 175, 0.1); /* Линия сверху */
+            margin-top: 100px;                          /* Отступ от контента */
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ШАПКА -->
+    <header>
+        <div class="header-inner">
+            <div class="logo">PROJECT SHOP</div>     <!-- лого в центре -->
+            <nav>
+                <a href="/" class="{% if request.path == '/' %}active{% endif %}">Главная</a>       <!--переход на главное меню -->
+                <a href="/catalog" class="{% if request.path == '/catalog' %}active{% endif %}">Каталог</a>  <!-- переход на каталог-->
+                <a href="/cart" class="cart-link">
+                    Корзина
+                    {% if session.get('cart', [])|length > 0 %}
+                        <span class="cart-badge">{{ session.get('cart', [])|length }}</span><!-- переход в корзину -->
+                    {% endif %}
+                </a>
+                <a href="/contacts" class="{% if request.path == '/contacts' %}active{% endif %}">Контакты</a>     <!-- переход в контакты -->
+            </nav>
+        </div>
+    </header>
+
+    <!-- КОНТЕНТ -->
+    <div class="container">
+        <h1>СВЯЖИТЕСЬ С НАМИ</h1>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <i class="fas fa-phone"></i>                            <!--Иконка телефона-->
+                <h3>Телефон</h3>
+                <p>Звоните в любое время</p>
+                <a href="tel:+71234567890">+7 (123) 456 78 90</a>        <!-- мой номер -->
+            </div>
+            <div class="contact-card">
+                <i class="fab fa-instagram"></i>                       <!--Иконка Instagram-->
+                <h3>Instagram</h3>
+                <p>Самые свежие коллекции</p>
+                <a href="https://www.instagram.com/project_shop_kz?igsh=MTF4dnZ1dWFxaDNzZQ%3D%3D&utm_source=qr" target="_blank">@project_shop_kz</a>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt"></i>                <!--Иконка адреса-->
+                <h3>Адрес</h3>
+                <p>Примеряем и забираем</p>
+                <p style="font-size:22px; color:#00AFAF; font-weight:700;">
+                    Астана, пр. Мангилик Ел, 55/11<br>(EXPO район)
+                </p>
+            </div>
+        </div>
+
+        <div class="social">
+            <a href="https://www.instagram.com/project_shop_kz?igsh=MTF4dnZ1dWFxaDNzZQ%3D%3D&utm_source=qr" target="_blank" class="fab fa-instagram"></a>    <!--Instagram-->
+            <a href="https://t.me/+53GNmHLKIiZmODBi" target="_blank" class="fab fa-telegram"></a>             <!--Telegram -->
+            <a href="https://www.tiktok.com/@project_shop_kz?_r=1&_t=ZM-91fcHMyI0M8" target="_blank" class="fab fa-tiktok"></a>         <!--TikTok-->
+            <a href="https://wa.me/77071190909" target="_blank" class="fab fa-whatsapp"></a> <!--whatsapp-->
+        </div>
+
+        <div class="map">
+            <!-- КАРТА ПО ССЫЛКЕ ГУГЛ МАПС -->
+            <iframe src="https://maps.google.com/maps?q=astana&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>     <!--карта астаны -->
+        </div>
+    </div>
+
+    <!-- ПОДВАЛ -->
+    <footer>
+        © 2025 PROJECT SHOP online shop — Все права защищены
+    </footer>
+</body>
+</html>

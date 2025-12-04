@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Восстановление пароля — ROMA-ASLAN</title>
+    <style>
+        body { font-family: Arial; background: #111; color: #00AFAF; text-align: center; padding: 100px 20px; }
+        h1 { font-size: 42px; margin-bottom: 30px; }
+        input, button { padding: 16px; margin: 10px; width: 320px; max-width: 90%; border-radius: 50px; border: none; font-size: 16px; }
+        input { background: #222; color: white; }
+        button { background: #00AFAF; color: white; font-weight: bold; cursor: pointer; }
+        a { color: #00AFAF; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>ВОССТАНОВЛЕНИЕ ПАРОЛЯ</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div style="color: red; margin: 20px;">{{ messages[0] }}</div>
+        {% endif %}
+    {% endwith %}
+    <form method="post">
+        <input type="email" name="email" placeholder="Email" required><br>
+        <button type="submit">Отправить ссылку</button>
+    </form>
+    <br>
+    <a href="/login">← Вернуться ко входу</a>
+</body>
+</html>

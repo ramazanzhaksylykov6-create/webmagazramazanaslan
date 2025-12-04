@@ -1,0 +1,304 @@
+<!DOCTYPE html>                                    <!--Тип документа — современный HTML5 --> 
+<html lang="ru">                                     <!--Язык сайта — русский-->
+
+<head>
+    <meta charset="UTF-8">                          <!--Поддержка русских букв-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!--Адаптив под телефоны -->
+    <title>Корзина — ROMA-ASLAN</title>              <!--Название вкладки в браузере-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> <!--Иконки (телефон, инста и т.д.) -->
+
+    <style>
+        /* ==== СБРОС СТИЛЕЙ ==== */
+        * { margin: 0; padding: 0; box-sizing: border-box; } /* Убираем все отступы и включаем правильный расчёт размеров */
+
+        /* ==== ОСНОВНЫЕ СТИЛИ СТРАНИЦЫ ==== */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif; /* Современный чистый шрифт */
+            background: #ffffff;                        /* Белый фон */
+            color: #333;                                /* Тёмный текст */
+            min-height: 100vh;                          /* Страница не короче экрана */
+            line-height: 1.6;                           /* Удобная высота строк */
+        }
+
+        /* ==== ШАПКА (ПРИЛИПАЕТ СВЕРХУ) ==== */
+        header {
+            position: fixed;                            /* Фиксируется при прокрутке */
+            top: 0; left: 0; right: 0;                  /* На всю ширину экрана */
+            z-index: 1000;                              /* Поверх всего контента */
+            padding: 16px 0;                            /* Отступы внутри шапки */
+            background: rgba(245, 245, 248, 0.78);      /* Полупрозрачный серый фон */
+            backdrop-filter: blur(20px);                /* Эффект матового стекла */
+            -webkit-backdrop-filter: blur(20px);        /* Для старых версий Safari */
+            border-bottom: 1px solid rgba(0, 175, 175, 0.12); /* Тонкая линия Тиффани снизу */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04); /* Лёгкая тень под шапкой */
+        }
+
+        .header-inner {
+            max-width: 1400px;                          /* Контент не шире 1400px */
+            margin: 0 auto;                             /* По центру страницы */
+            padding: 0 30px;                            /* Отступы по бокам */
+            display: flex;                              /* Логотип и меню в одной строке */
+            justify-content: space-between;             /* Логотип слева, меню справа */
+            align-items: center;                        /* Выравнивание по центру по вертикали */
+        }
+
+        .logo {
+            font-size: 34px;                            /* Большой размер названия */
+            font-weight: 900;                           /* Очень жирный текст */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            letter-spacing: 1px;                        /* Расстояние между буквами */
+        }
+
+        nav a {
+            color: #555;                                /* Цвет ссылок — серый */
+            text-decoration: none;                      /* Без подчёркивания */
+            margin-left: 45px;                          /* Расстояние между пунктами меню */
+            font-weight: 600;                           /* Полужирный текст */
+            font-size: 17px;                            /* Размер шрифта */
+            transition: color 0.3s;                     /* Плавная смена цвета при наведении */
+        }
+
+        nav a:hover, nav a.active {
+            color: #00AFAF;                             /* При наведении и на текущей странице — Тиффани */
+            font-weight: 700;                           /* Ещё жирнее */
+        }
+
+        .cart-link {
+            background: #00AFAF;                        /* Фон кнопки "Корзина" */
+            color: white !important;                    /* Белый текст (важно!) */
+            padding: 12px 30px;                         /* Отступы внутри кнопки */
+            border-radius: 50px;                        /* Скруглённые углы */
+            font-weight: 700;                           /* Жирный текст */
+            position: relative;                         /* Чтобы бейджик был поверх */
+        }
+
+        .cart-badge {
+            position: absolute;                         /* Позиция поверх кнопки */
+            top: -8px;                                  /* Сдвиг вверх */
+            right: -10px;                               /* Сдвиг вправо */
+            background: #ff4757;                        /* Красный фон */
+            color: white;                               /* Белая цифра */
+            font-size: 13px;                            /* Маленький текст */
+            min-width: 22px;                            /* Минимум ширина */
+            height: 22px;                               /* Высота */
+            border-radius: 50%;                         /* Круглая форма */
+            display: flex;                              /* Центрирование содержимого */
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;                          /* Жирная цифра */
+        }
+
+        /* ==== ОСНОВНОЙ КОНТЕНТ ==== */
+        .container {
+            max-width: 1200px;                          /* Максимальная ширина */
+            margin: 120px auto 140px;                   /* Отступ сверху и снизу + по центру */
+            padding: 0 30px;                            /* Отступы по бокам */
+        }
+
+        h1 {
+            text-align: center;                         /* Заголовок по центру */
+            font-size: 68px;                            /* Очень большой текст */
+            font-weight: 800;                           /* Жирный */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            margin-bottom: 70px;                        /* Отступ снизу */
+        }
+
+        /* ==== ТОВАРЫ В КОРЗИНЕ ==== */
+        .cart-items {
+            display: grid;                              /* Сетка для товаров */
+            gap: 32px;                                  /* Расстояние между товарами */
+            margin-bottom: 60px;                        /* Отступ снизу */
+        }
+
+        .cart-item {
+            background: #fafafa;                        /* Кремовый фон карточки */
+            border-radius: 30px;                        /* Скруглённые углы */
+            padding: 32px;                              /* Отступы внутри */
+            display: flex;                              /* Фото и инфа в одной строке */
+            align-items: center;                        /* По центру по вертикали */
+            gap: 32px;                                  /* Расстояние между фото и текстом */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);   /* Лёгкая тень */
+            border: 1px solid rgba(0, 175, 175, 0.1);   /* Тонкая рамка Тиффани */
+            transition: all 0.3s;                       /* Плавная анимация */
+        }
+
+        .cart-item:hover {
+            box-shadow: 0 20px 40px rgba(0, 175, 175, 0.12); /* Тень ярче при наведении */
+        }
+
+        .cart-item img {
+            width: 180px;                               /* Фиксированная ширина фото */
+            height: 180px;                              /* Фиксированная высота */
+            object-fit: cover;                          /* Фото красиво обрезается */
+            border-radius: 20px;                        /* Скруглённые углы фото */
+            border: 1px solid #eee;                     /* Тонкая рамка */
+        }
+
+        .item-info h3 {
+            font-size: 28px;                            /* Название товара крупно */
+            margin-bottom: 12px;                        /* Отступ снизу */
+            color: #222;                                /* Тёмный текст */
+        }
+
+        .item-info p {
+            color: #666;                                /* Серое описание */
+            margin-bottom: 18px;                        /* Отступ перед ценой */
+            font-size: 16px;
+        }
+
+        .item-price {
+            font-size: 38px;                            /* Большая цена */
+            font-weight: 800;                           /* Очень жирная */
+            color: #00AFAF;                             /* Цвет Тиффани */
+        }
+
+        .remove-btn {
+            background: transparent;                    /* Прозрачный фон */
+            border: 2px solid #00AFAF;                  /* Рамка Тиффани */
+            color: #00AFAF;                             /* Текст Тиффани */
+            padding: 14px 32px;                         /* Отступы внутри кнопки */
+            border-radius: 50px;                        /* Скруглённые углы */
+            cursor: pointer;                            /* Рука при наведении */
+            font-weight: 700;                           /* Жирный текст */
+            font-size: 15px;
+            transition: all 0.4s;                       /* Плавная анимация */
+        }
+
+        .remove-btn:hover {
+            background: #00AFAF;                        /* Заливается Тиффани */
+            color: white;                               /* Белый текст */
+        }
+
+        /* ==== ИТОГО И ОФОРМЛЕНИЕ ==== */
+        .summary {
+            background: #f8f9fa;                        /* Светлый фон */
+            padding: 50px;                              /* Большие отступы */
+            border-radius: 32px;                        /* Скруглённые углы */
+            text-align: center;                         /* По центру */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);   /* Тень */
+            border: 1px solid rgba(0, 175, 175, 0.15);   /* Рамка Тиффани */
+        }
+
+        .total {
+            font-size: 52px;                            /* Огромная сумма */
+            font-weight: 800;                           /* Очень жирная */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            margin-bottom: 40px;                        /* Отступ перед кнопкой */
+        }
+
+        .checkout-btn {
+            background: #00AFAF;                        /* Фон Тиффани */
+            color: white;                               /* Белый текст */
+            padding: 24px 100px;                        /* Большие отступы */
+            border: none;                               /* Без рамки */
+            border-radius: 60px;                        /* Очень скруглённая */
+            font-size: 28px;                            /* Крупный текст */
+            font-weight: 800;                           /* Максимально жирный */
+            cursor: pointer;                            /* Рука при наведении */
+            transition: all 0.4s;                       /* Плавная анимация */
+            box-shadow: 0 15px 35px rgba(0, 175, 175, 0.3); /* Тень под кнопкой */
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-6px);                /* Поднимается вверх */
+            box-shadow: 0 25px 50px rgba(0, 175, 175, 0.4); /* Тень ярче */
+            background: #009c9c;                        /* Темнее при наведении */
+        }
+
+        /* ==== ПУСТАЯ КОРЗИНА ==== */
+        .empty {
+            text-align: center;                         /* По центру */
+            padding: 140px 20px;                        /* Большие отступы */
+            font-size: 32px;                            /* Большой текст */
+            color: #888;                                /* Серый цвет */
+        }
+
+        .empty a {
+            color: #00AFAF;                             /* Ссылка цвета Тиффани */
+            text-decoration: none;                      /* Без подчёркивания */
+            font-weight: 700;                           /* Жирный текст */
+            font-size: 36px;                            /* Ещё крупнее */
+            display: block;                             /* На всю ширину */
+            margin-top: 30px;                           /* Отступ сверху */
+        }
+
+        .back-link {
+            display: block;                             /* На всю ширину */
+            text-align: center;                         /* По центру */
+            margin-top: 60px;                           /* Отступ сверху */
+            color: #00AFAF;                             /* Цвет Тиффани */
+            font-size: 22px;                            /* Крупный текст */
+            text-decoration: none;                      /* Без подчёркивания */
+            font-weight: 600;                           /* Полужирный */
+        }
+
+        /* ==== ПОДВАЛ ==== */
+        footer {
+            background: #f8f9fa;                        /* Светло-кремовый фон */
+            color: #666;                                /* Серый текст */
+            text-align: center;                         /* По центру */
+            padding: 90px 20px;                         /* Большие отступы */
+            border-top: 1px solid rgba(0, 175, 175, 0.1); /* Тонкая линия сверху */
+            margin-top: 100px;                          /* Отступ от контента */
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ШАПКА САЙТА -->
+    <header>
+        <div class="header-inner">
+            <div class="logo">PROJECT SHOP</div>    <!-- лого в центре -->
+            <nav>
+                <a href="/" class="{% if request.path == '/' %}active{% endif %}">Главная</a>  <!--переход на главное меню -->
+                <a href="/catalog" class="{% if request.path == '/catalog' %}active{% endif %}">Каталог</a>    <!-- переход на каталог-->
+                <a href="/cart" class="cart-link">
+                <a href="/cart" class="cart-link">
+                    Корзина
+                    {% if session.get('cart', [])|length > 0 %}
+                        <span class="cart-badge">{{ session.get('cart', [])|length }}</span><!-- переход в корзину -->
+                    {% endif %}
+                </a>
+                <a href="/contacts" class="{% if request.path == '/contacts' %}active{% endif %}">Контакты</a><!-- переход в контакты -->
+            </nav>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="container">
+        <h1>ВАША КОРЗИНА</h1>
+        {% if cart_items %}<!-- Если в корзине есть товары -->
+        <div class="cart-items">
+            {% for product in cart_items %}<!-- Цикл по всем товарам в корзине -->
+            <div class="cart-item">
+                <img src="{{ product.image or '/static/images/no-photo.jpg' }}" alt="{{ product.name }}"> <!-- Фото или заглушка -->
+                <div class="item-info">
+                    <h3>{{ product.name }}</h3><!--Название товара */-->
+                    <p>{{ product.description or 'Премиальная одежда с идеальной посадкой' }}</p> <!--Описание-->
+                    <div class="item-price">{{ product.price }} ₸</div> <!--Цена-->
+                    </div>
+                <form action="{{ url_for('remove', pid=product.id) }}" method="post"> <!-- Форма удаления -->
+                    <button type="submit" class="remove-btn">УДАЛИТЬ</button> <!-- Кнопка удаления -->
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="summary">
+            <div class="total">ИТОГО: {{ total }} ₸</div>   <!--Общая сумма-->
+            <a href="{{ url_for('checkout') }}" class="checkout-btn">ОФОРМИТЬ ЗАКАЗ</a><!--Кнопка оформления-->
+        </div>
+        {% else %}<!--Если корзина пуста-->
+        <div class="empty">
+            Корзина пока пуста<br><br>
+            <a href="{{ url_for('catalog') }}">Перейти в каталог</a>
+        </div>
+        {% endif %}
+        <a href="{{ url_for('catalog') }}" class="back-link">← Продолжить покупки</a> <!-- Ссылка назад в каталог -->
+    </div>
+    <!-- ПОДВАЛ -->
+    <footer>
+        © 2025 PROJECT SHOP online shop — Все права защищены
+    </footer>
+</body>
+</html>
